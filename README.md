@@ -1,4 +1,4 @@
-# Reas_Portfolio
+# Henri-Portfolio
 ### Hello there! I am John Henri, and this is my portfolio.
 ###### Portfolio Link: https://hunter4594.github.io/Henri-Portfolio/#Home
 - It contains a little bit of me, my works, and skills. You can also see here my contacts.
