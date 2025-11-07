@@ -1,0 +1,937 @@
+
+
+    /* Make sections relative to contain the particles */
+    #Home, #Contact {
+        position: relative;
+        overflow: hidden; /* Prevents scrollbars if particles "pop" out */
+    }
+
+    #Contact {
+    z-index: 0;
+    }
+
+
+/* Particle containers (responsive + safe for parallax) */
+#particles-hero,
+#particles-contact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* keep it behind content */
+  pointer-events: none; /* don't block clicks */
+}
+
+/* Optional: tweak only if you truly need extra height on very large screens */
+@media (min-width: 1200px) {
+  #particles-contact {
+    top: -25%;
+    height: 150%;
+  }
+}
+
+
+
+        body {
+            /* A background is required to see the glass effect. 
+              I'm adding a dark gradient. 
+            */
+            background-color: #111827;
+            background-image: linear-gradient(to bottom right, #111827, #37306B);
+            color: #f3f4f6; /* Light text for readability */
+        }
+
+        h2, h3{
+            font-family: 'Archivo Black'; font-weight: bold;
+        }
+
+    #blue-sphere,
+    #purple-sphere {
+        position: absolute;
+        opacity: 0.4; /* Blends them into the dark background */
+        will-change: transform; /* Optimizes for JS animation */
+    }
+
+#blue-sphere {
+    position: absolute;
+    opacity: 0.3; /* Tweak opacity */
+    will-change: transform;
+    width: 350px;
+    top: -50px;
+    right: -100px;
+    z-index: -4; /* <-- (farther back) */
+}
+
+#purple-sphere {
+    position: absolute;
+    opacity: 0.4; /* Tweak opacity */
+    will-change: transform;
+    width: 250px;
+    bottom: -80px;
+    left: -60px;
+    z-index: -2; /* <-- (closer) */
+}
+
+/* --- New Parallax Spheres --- */
+#sphere-3 {
+    position: absolute;
+    opacity: 0.3;
+    will-change: transform;
+    width: 150px;   /* Small */
+    top: 20%;       /* Center-left */
+    left: 15%;
+    z-index: -3;    /* Mid-ground */
+}
+
+#sphere-4 {
+    position: absolute;
+    opacity: 0.2;
+    will-change: transform;
+    width: 200px;    /* Tiny */
+    bottom: 15%;    /* Bottom right */
+    right: 50%;
+    z-index: -4;    /* Farthest back */
+}
+
+#sphere-5 {
+    position: absolute;
+    opacity: 0.25;
+    will-change: transform;
+    width: 400px;   /* Large */
+    top: 40%;       /* Center-right */
+    right: 100px;
+    z-index: -5;    /* Far back */
+}
+
+/* --- Contact Parallax Spheres --- */
+#contact-sphere-1,
+#contact-sphere-2,
+#contact-sphere-3 {
+    position: absolute;
+    opacity: 0.3;
+    will-change: transform;
+}
+
+#contact-sphere-1 {
+    width: 200px;
+    top: -40%;
+    left: 10px;
+    z-index: -3;    /* Mid-ground */
+}
+
+#contact-sphere-3 {
+    width: 500px;
+    top: 10%;
+    left:15%;
+    z-index: -2;    /* Closest */
+}
+
+#contact-sphere-2 {
+    width: 300px;
+    top: -50%;
+    right: 10%;
+    z-index: -4;    /* Farthest */
+}
+
+/* --- Clean Gradient Header Styles --- */
+/* 1. Base style for all gradient headers */
+    #About h2,
+    #Skills h2,
+    #Projects h2,
+    #Contact h2 {
+        /* Create a background gradient (we'll define this for each) */
+        background-image: var(--gradient-color);
+        
+        /* Clip the background to the text shape */
+        -webkit-background-clip: text;
+        background-clip: text;
+        
+        /* Make the text color transparent so the background shows through */
+        color: transparent;
+        
+        /* Fallback for browsers that don't support it */
+        -webkit-text-fill-color: transparent; 
+    }
+
+    /* 2. Define the gradient for each section */
+    
+    /* White-to-Light-Blue (matches the "About" video) */
+    #About h2 {
+        --gradient-color: linear-gradient(45deg, #FFFFFF, #a7bfff);
+    }
+
+    /* White-to-Teal (matches the "Skills" video) */
+    #Skills h2 {
+        --gradient-color: linear-gradient(45deg, #FFFFFF, #AAAAAA);
+    }
+    
+    /* White-to-Red (matches the "Projects" video) */
+    #Projects h2 {
+        --gradient-color: linear-gradient(45deg,  #FFFFFF, #00e0e0);
+    }
+
+    /* White-to-Primary-Blue (matches buttons) */
+    #Contact h2 {
+        --gradient-color: linear-gradient(45deg, #FFFFFF, #0d6efd);
+    }
+
+    /* --- Project Table Hover Effect --- */
+
+    /* 1. Add a smooth transition to the table row */
+    #Projects tbody tr {
+        /* This makes the color changes feel smooth */
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.4s ease-in-out;
+    }
+
+    /* 2. Style the row's background on hover */
+    #Projects tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Brighter glass effect */
+    }
+
+    /* 3. Change all text color to green on hover */
+    #Projects tbody tr:hover td,
+    #Projects tbody tr:hover td span.badge {
+        color: #7ae468; /* Use bright green and !important to override badge colors */
+        transition: color 0.2s ease-in-out; /* Smooth color change for text */
+    }
+    /* 4. NEW: Override badges to KEEP their original text color */
+    
+    /* Keeps .text-dark badges ( yellow/info ones) black */
+    #Projects tbody tr:hover td span.badge.text-dark {
+        color: #000 !important;
+    }
+    
+    /* Keeps all other badges ( primary/success ones) white */
+    #Projects tbody tr:hover td span.badge:not(.text-dark) {
+        color: #fff !important;
+    }
+
+        h2, h3, h4, h5, h6, li {
+            color: #ffffff;
+        }
+        .glass-effect h3, 
+        .glass-effect h4, 
+        .glass-effect p, 
+        .glass-effect li {
+            color: #ffffff;
+            transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+        }
+        /* Make all text in the home section white */
+        #Home h3, #Home h4, #Home p {
+            color: #ffffff;
+        }
+
+        /* This is the glassmorphism class */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            
+        }
+
+        /* This will style all glass elements in the Home section */
+    #Home .glass-effect {
+        /* A semi-transparent blue */
+        background: rgba(86, 180, 233, 0.1); 
+        border: 1px solid rgba(86, 180, 233, 0.15);
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* This will style all glass elements in the About section */
+    #About .glass-effect {
+        /* A semi-transparent light blue/purple */
+        background: rgba(167, 191, 255, 0.1);
+        border: 1px solid rgba(167, 191, 255, 0.15);
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* This will style all glass elements in the Skills section */
+    #Skills .glass-effect {
+        /* A semi-transparent silver/white */
+        background: rgba(204, 204, 204, 0.1);
+        border: 1px solid rgba(204, 204, 204, 0.15);
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Home Hover */
+    #Home .glass-effect:hover {
+        transform: scale(1.03);
+        background-color: rgba(86, 180, 233, 0.2); /* Stronger background */
+        border-color: rgba(86, 180, 233, 0.25); /* Stronger border */
+    }
+    /* Make text glow with the section color */
+    #Home .glass-effect:hover :is(h3, h4, h5, p, li) {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(86, 180, 233, 0.8);
+    }
+
+    /* About Hover */
+    #About .glass-effect:hover {
+        transform: scale(1.03);
+        background-color: rgba(167, 191, 255, 0.2); /* Stronger background */
+        border-color: rgba(167, 191, 255, 0.25); /* Stronger border */
+    }
+    /* Make text glow with the section color */
+    #About .glass-effect:hover :is(h3, h4, p, li) {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(167, 191, 255, 0.8);
+    }
+
+    /* Skills Hover */
+    #Skills .glass-effect:hover {
+        transform: scale(1.03);
+        background-color: rgba(204, 204, 204, 0.2); /* Stronger background */
+        border-color: rgba(204, 204, 204, 0.25); /* Stronger border */
+    }
+    /* Make text glow with a white/silver color */
+    #Skills .glass-effect:hover :is(h3, h4, p, li) {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    }
+
+    /* --- Custom Glass Button Style --- */
+
+    /* 1. Base Button Style */
+    .btn-primary {
+        /* Use Bootstrap's blue, but make it transparent */
+        background: rgba(13, 110, 253, 0.2) !important; 
+        
+        /* Add the glass effect */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        
+        /* A slightly brighter border */
+        border: 1px solid rgba(13, 110, 253, 0.3) !important;
+        
+        color: #ffffff; /* Ensure text is white */
+        
+        /* Add smooth animation for hover */
+        transition: all 0.2s ease-in-out;
+        
+        /* This removes the default Bootstrap glow-ring on click */
+        --bs-btn-focus-shadow-rgb: none;
+    }
+
+    /* 2. Hover & Focus Style */
+    .btn-primary:hover,
+    .btn-primary:focus {
+        /* Make it brighter */
+        background: rgba(13, 110, 253, 0.4) !important;
+        border: 1px solid rgba(13, 110, 253, 0.5) !important;
+        
+        /* Add the 'lift' effect */
+        transform: scale(1.03);
+        
+        /* Add a subtle glow to the text */
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    /* 3. Active (On-Click) Style */
+    .btn-primary:active {
+        /* Add the 'press-down' effect */
+        transform: scale(0.98) !important;
+        background: rgba(13, 110, 253, 0.5) !important;
+    }
+
+    /* Make SVGs responsive */
+    #Hero_Contact svg {
+        stroke: #ffffff;
+        /* Default size for small mobile */
+        width: 35px;
+        height: 35px;
+    }
+
+    #emoji {
+        font-size: 2.5rem;  /* You can change 2rem to 1.5rem or 2.5rem */
+        line-height: 1; /* Helps with vertical alignment */
+    }
+
+    /* On medium screens (tablets) and up, make them 50px */
+    @media (min-width: 768px) {
+        #Hero_Contact svg {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    .object-fit-cover {
+            object-fit: cover;
+            object-position: top center; /* This focuses the crop on the top */
+        }
+        #mypic #picture {
+        width: 100%; /* Ensure the container takes full width */
+        height: auto; /* Ensure the container takes full height */
+
+        }
+
+        #mypic #picture img {
+        width: 100%; /* Make the image take 100% width of its parent */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Crop the image to fill the container, maintaining aspect ratio */
+        object-position: center; /* Center the image within its cropped area */
+        }
+        .btn-wrap-text {
+        white-space: normal !important; /* Forces the text to wrap */
+        line-height: 1.2 ; /* Adjusts spacing between the lines */
+        }
+      
+    /* --- Holo Tilt Effect --- */
+
+    /* 1. This is the main glass panel for picture.
+       We give it a 'perspective' to create the 3D space.
+    */
+    #mypic #picture {
+        position: relative; /* Needed for the overlays */
+        perspective: 1000px;
+        transition: transform 0.1s linear; /* Smooth mouse tracking */
+    }
+
+    /* 2. This is the SHINY "light" overlay */
+    #mypic #picture::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit; /* Matches rounded-4 */
+        
+        /* We stack two gradients on top of each other */
+        background: 
+            /* 1. The ORIGINAL shine (follows cursor) */
+            radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%),
+                rgba(255, 255, 255, 0.6) 0%,
+                rgba(255, 255, 255, 0) 40%
+            ) no-repeat, /* Added no-repeat */
+            
+            /* 2. The NEW opposite shine (dimmer) */
+            radial-gradient(
+                circle at var(--x-oppo, 50%) var(--y-oppo, 50%),
+                rgba(255, 255, 255, 0.3) 0%, /* A bit softer */
+                rgba(255, 255, 255, 0) 30%
+            ) no-repeat;
+        /* === END OF UPDATE === */
+        
+        opacity: 0; /* Hidden by default */
+        transition: opacity 0.3s ease-out;
+        z-index: 3; /* Sits on top of the image */
+    }
+
+/* 3. This is the RAINBOW "holo" overlay (REVISED) */
+    #mypic #picture::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        /* NEW HOLOGRAPHIC GRADIENT:
+          This creates the "oil slick" / "holofoil" pattern.
+        */
+        background-image: repeating-linear-gradient(
+            -45deg,
+            rgba(0, 255, 255, 0.3) 0,    /* Cyan */
+            rgba(255, 0, 255, 0.3) 10%,  /* Magenta */
+            rgba(255, 255, 0, 0.3) 20%,  /* Yellow */
+            rgba(0, 255, 255, 0.3) 30%   /* Cyan again to loop */
+        );
+        
+        /* Make the gradient pattern huge so it has room to move */
+        background-size: 400% 400%;
+        
+        /* NEW: Move the gradient's position with new mouse variables
+          (This is different from var(--x) for the white shine)
+        */
+        background-position: var(--x-holo, 50%) var(--y-holo, 50%);
+
+        /* This blend mode is key for the effect */
+        mix-blend-mode: overlay; 
+        
+        opacity: 0; /* Hidden by default */
+
+        /* MODIFIED: Add 'background-position' to the transition */
+        transition: opacity 0.3s ease-out, background-position 0.1s linear;
+        
+        z-index: 0; /* Sits just behind the light */
+    }
+
+    /* --- Profile Card Overlay --- */
+    #picture {
+        position: relative; /* This makes #picture the reference for absolutely positioned children */
+
+    }
+
+    #profile-card {
+        position: absolute; 
+        bottom: 5%;      
+        z-index: 10;        
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+
+        /* --- NEW/REPLACED LINES --- */
+        left: 20px;         /* This is 20px space on the left */
+        right: 20px;        /* This is 20px space on the right */
+        width: auto;        /* Let the card's width be automatic */
+    }
+
+
+    /* 4. Show the overlays when hovering the picture */
+    #mypic #picture:hover::before,
+    #mypic #picture:hover::after {
+        opacity: 1;
+    }
+
+    /* 5. Make the image sit behind the overlays */
+    #mypic #picture img {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* --- Scroll Down Indicator --- */
+    #scroll-indicator {
+        position: absolute;
+        bottom: 2rem; /* Adjust this value (e.g., 3rem) to move it up or down */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10; /* Ensures it's on top of particles */
+        text-align: center;
+    }
+
+    #scroll-indicator a {
+        opacity: 0.7;
+        /* Add 'display: inline-block' so transform works */
+        display: inline-block; 
+        /* Add 'transform' and 'text-shadow' to the transition */
+        transition: opacity 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    #scroll-indicator a:hover {
+        opacity: 1;
+        /* Add the "lift" */
+        transform: translateY(-5px);
+        /* Add the "glow" */
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    /* This is the bouncing animation */
+    #scroll-indicator .arrow-icon {
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(10px); /* Bounces down */
+        }
+        60% {
+            transform: translateY(5px);
+        }
+    }
+
+    /* --- Hide Scroll Indicator on Mobile --- */
+    @media (max-width: 768px) { 
+        #scroll-indicator {
+            display: none;
+        }
+    }
+    
+    
+        /* Standardize all icons within the Skills section to 75px */
+    #Skills .skill-item svg {
+        width: 75px !important;
+        height: 75px !important;
+        /* Ensure the icon centers itself */
+        display: block; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*Adjusted responsive font sizes for the lists to be cleaner */
+    #Skills .list-unstyled li {
+        font-size: 1.1rem; /* Slightly larger text for better readability */
+    }
+
+    /*Progress Bar list text alignment */
+    #soft_skills .list-unstyled li {
+        text-align: left;
+    }
+
+    .sql-color-fix svg path,
+    .sql-color-fix svg g path {
+        fill: #ffffff !important; 
+    }
+
+    .icon-bg {
+        background-color: #ffffff; /* White background */
+        border-radius: 50%; /* Makes it a circle */
+        padding: 8px; /* Added 8px padding around the icon for spacing */
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+    }
+
+    #Contact .btn svg {
+        width: 24px;
+        height: 24px;
+        /* Aligns icon with the text */
+        vertical-align: middle;
+        margin-top: -4px; /* Fine-tunes vertical alignment */
+        margin-right: 4px; /* Adds space between icon and text */
+    }
+
+    /*Sets the icon color for the blue/red buttons 
+    */
+    .btn-outline-primary svg path,
+    .btn-outline-danger svg path {
+        fill: currentColor !important;
+    }
+
+    /*Sets the icon color for the light-gray GitHub button 
+    */
+    .btn-outline-secondary svg path {
+        fill: #333 !important; /* Dark color for light buttons */
+    }
+
+    #Hero_Contact a svg {
+        /* This makes the icon scale and color-change smoothly */
+        transition: transform 0.2s ease-in-out, 
+                    fill 0.2s ease-in-out, 
+                    stroke 0.2s ease-in-out;
+        display: inline-block; 
+    }
+
+    /* 2: 
+      Set the default state for the Facebook icon.
+      FB icon is a shape that needs a 'fill', not a 'stroke'.
+    */
+     #Hero_Contact a#FB svg {
+        fill: #ffffff;   
+        stroke: none;   
+    }
+    
+     #Hero_Contact a#linkedIn svg {
+        fill: #ffffff;    
+        stroke: none;   
+    }
+    /* 3: 
+      Add the hover colors AND the scale effect
+    */
+    
+    /* LinkedIn Hover (Brand color: #0A66C2) */
+    #Hero_Contact a#LinkedIn:hover svg {
+        fill: #0A66C2; /* LinkedIn Blue */
+        transform: scale(1.15);
+    }
+
+    /* GitHub Hover (Brand color: #181717) */
+    #Hero_Contact a#Github:hover svg {
+        stroke: #181717; /* GitHub Black */
+        transform: scale(1.15);
+    }
+
+    /* Instagram Hover (Brand color: #E4405F) */
+    #Hero_Contact a#Insta:hover svg {
+        stroke: #E4405F; /* Instagram Pink */
+        transform: scale(1.15);
+    }
+
+    /* Facebook Hover (Brand color: #1877F2) */
+    #Hero_Contact a#FB:hover svg {
+        fill: #1877F2;   /* Facebook Blue */
+        transform: scale(1.15);
+    }
+
+    .block {
+        opacity: 0;
+        transform: scale(0.5);
+        transition: opacity 1s ease-out, transform 1s ease-out !important;
+    }
+    .lblock {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: opacity 1s ease-out, transform 1s ease-out !important;
+    }
+    .rblock {
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 1s ease-out, transform 1s ease-out !important;
+    }
+
+    /* 2. This is the "visible" state (when in view)
+      - We just add this class with JavaScript.
+    */
+    .block.in-view {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .lblock.in-view,
+    .rblock.in-view {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* --- Navbar Dark on Hero --- */
+
+    /* 1. Make the navbar dark by default (when it's on the hero section) */
+    .navbar.glass-effect {
+        background: rgba(0, 0, 0, 0.3); /* A darker, 30% black glass */
+        border-color: rgba(255, 255, 255, 0.1);
+        /* Make the transition smooth */
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+
+    /* 2. Make it lighter when the .scrolled class is added (after leaving hero) */
+    .navbar.glass-effect.scrolled {
+        background: rgba(255, 255, 255, 0.1); /* original light glass */
+        border-color: rgba(255, 255, 255, 0.15); /* original light border */
+    }
+
+        /* --- Custom Soft Skills Progress Bar --- */
+    #soft_skills .progress {
+        height: 10px; /* Makes the bar a bit thicker */
+        background-color: rgba(255, 255, 255, 0.2); /* Light track */
+        border-radius: 5px;
+    }
+
+    #soft_skills .progress-bar {
+        background-color: transparent; /* Remove default solid color */
+        background-image: linear-gradient(to right, #0d6efd, #6f42c1); /* Blue-to-Purple */
+        border-radius: 5px;
+    }
+
+    /* Styles for the new "Label (left) / Percent (right)" layout */
+    #soft_skills .skill-label {
+        font-size: 1.1rem; /* Matches other skills list */
+    }
+
+    #soft_skills .skill-percentage {
+        font-weight: bold;
+        color: #a7bfff; /* Matches the "About" section glow */
+    }
+
+    /* --- Navbar Hover Animation & Scroll Effect --- */
+
+    /* 1. Apply base styles to ALL three link types */
+    #navbar-name,
+    #navbar-resume .nav-link,
+    .navbar-nav.mx-4 .nav-link { /* Be specific to the center links */
+        position: relative;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        
+        /* Added 'color' to the transition */
+        transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+        
+        /* ADDED: Set the default link color to light */
+        color: #f3f4f6 !important; 
+    }
+
+    /* 2. Define the hover state for ALL three */
+    #navbar-name:hover,
+    #navbar-resume .nav-link:hover,
+    .navbar-nav.mx-4 .nav-link:hover {
+        transform: translateY(-3px);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        color: #f3f4f6 !important; /* Keep color on hover */
+    }
+
+    /* 3. Style the new vertical lines (hidden by default) for ALL three */
+    #navbar-name::before, #navbar-name::after,
+    #navbar-resume .nav-link::before, #navbar-resume .nav-link::after,
+    .navbar-nav.mx-4 .nav-link::before,
+    .navbar-nav.mx-4 .nav-link::after {
+        content: '';
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.8);
+        width: 2px;
+        height: 0;
+        top: 50%;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* 4. Position the left and right lines */
+    #navbar-name::before,
+    #navbar-resume .nav-link::before,
+    .navbar-nav.mx-4 .nav-link::before {
+        left: 0.25rem;
+    }
+    #navbar-name::after,
+    #navbar-resume .nav-link::after,
+    .navbar-nav.mx-4 .nav-link::after {
+        right: 0.25rem;
+    }
+
+    /* 5. Animate the lines to "grow" on hover for ALL three */
+    #navbar-name:hover::before, #navbar-name:hover::after,
+    #navbar-resume .nav-link:hover::before, #navbar-resume .nav-link:hover::after,
+    .navbar-nav.mx-4 .nav-link:hover::before,
+    .navbar-nav.mx-4 .nav-link:hover::after {
+        height: 60%;
+        top: 20%;
+    }
+
+    /* 6. Hide the new elements by default */
+    #navbar-name,
+    #navbar-resume {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* 7. Show the elements when the nav has the .scrolled class */
+    .navbar.scrolled #navbar-name,
+    .navbar.scrolled #navbar-resume {
+        opacity: 1;
+    }
+    /* --- Navbar Logo Style --- */
+    #navbar-logo {
+        height: 40px; /* You can adjust this height (e.g., 35px, 45px) */
+        width: auto;  /* Maintains the aspect ratio */
+    }
+    
+    
+
+    /* 1: Fixes modal size by forcing all carousel images
+       to be the same height and cropping them to fit.
+    */
+    #galleryCarousel .carousel-item img {
+        object-fit: contain; 
+        max-height: 100vh; /* 70% of the screen's height */
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Stop modal text from stretching the image column */
+    #projectGalleryModal #projectDetails {
+        max-height: 70vh; /* Match the image's max-height */
+        overflow-y: auto;  /* Add a scrollbar if text is too long */
+
+        /* --- Scrollbar Styling (Firefox) --- */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.3);
+    }
+    /* --- Scrollbar Styling (Chrome, Safari, Edge) --- */
+    
+    /* 1. Set the width of the scrollbar */
+    #projectGalleryModal #projectDetails::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    /* 2. Style the "track" (the background) */
+    #projectGalleryModal #projectDetails::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    /* 3. Style the "thumb" (the part you drag) */
+    #projectGalleryModal #projectDetails::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+    }
+
+    /* 4. (Optional) Style the thumb on hover */
+    #projectGalleryModal #projectDetails::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Add this new rule to hide the default overlay buttons
+    */
+    #galleryCarousel .carousel-control-prev,
+    #galleryCarousel .carousel-control-next {
+        display: none !important; 
+    }
+
+    /* --- Glowing Section Dividers --- */
+
+    /* 1. Base style for all dividers */
+    #About::before,
+    #Skills::before,
+    #Projects::before,
+    #Contact::before,
+    #Home::after,
+    #About::after,
+    #Skills::after,
+    #Projects::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        width: 100%;       /* Width of the line */
+        height: 2px;      /* Thickness of the line */
+        
+        /* This is the glow effect */
+    background-image: linear-gradient(
+            to right, 
+            transparent, 
+            var(--glow-color) 20%, 
+            var(--glow-color) 80%, 
+            transparent
+        );
+        border-radius: 2px;
+        box-shadow: 
+            0 0 8px var(--glow-color),
+            0 0 15px var(--glow-color),
+            0 0 25px var(--glow-color);
+    }
+
+    #About::before,
+    #Skills::before,
+    #Projects::before,
+    #Contact::before {
+        top: 0;
+    }
+    /* 3. Position the BOTTOM dividers */
+    #Home::after,
+    #About::after,
+    #Skills::after,
+    #Projects::after {
+        bottom: 0;
+    }
+
+    /* --- Typing Effect --- */
+    .typing-effect::after {
+        content: '|';
+        animation: blink 0.7s infinite;
+        color: #f3f4f6; /* Match text color */
+    }
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+/* 4. Define the glow colors for each divider */
+
+    /* --- TOP Lines (match their own section) --- */
+    #About::before {
+        --glow-color: #a7bfff; /* About's light blue */
+    }
+    #Skills::before {
+        --glow-color: #AAAAAA; /* Skills' silver */
+    }
+    #Projects::before {
+        --glow-color: #00e0e0; /* Projects' teal */
+    }
+    #Contact::before {
+        --glow-color: #0d6efd; /* Contact's primary blue */
+    }
+
+    /* --- BOTTOM Lines (match the *next* section) --- */
+    #Home::after {
+        --glow-color: #a7bfff; /* About's light blue */
+    }
+    #About::after {
+        --glow-color: #a7bfff; /* Skills' silver */
+    }
+    #Skills::after {
+        --glow-color: #AAAAAA; /* Projects' teal */
+    }
+    #Projects::after {
+        --glow-color: #00e0e0; /* Contact's primary blue */
+    }
